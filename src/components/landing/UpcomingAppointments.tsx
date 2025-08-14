@@ -1,7 +1,11 @@
 import React from 'react';
 import { Calendar, Clock, MapPin, Video, Phone, User, ArrowRight } from 'lucide-react';
 
-const UpcomingAppointments: React.FC = () => {
+interface UpcomingAppointmentsProps {
+  onNavigate?: (page: string) => void;
+}
+
+const UpcomingAppointments: React.FC<UpcomingAppointmentsProps> = ({ onNavigate }) => {
   const appointments = [
     {
       id: 1,
@@ -192,11 +196,10 @@ const UpcomingAppointments: React.FC = () => {
                 Browse our network of verified professionals and book your next appointment instantly
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-gray-50 transition-all duration-500 hover:scale-105 shadow-lg hover:shadow-xl group">
-                  <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                  Book New Appointment
-                </button>
-                <button className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-500 hover:scale-105">
+                <button 
+                  onClick={() => onNavigate && onNavigate('professionals')}
+                  className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-500 hover:scale-105"
+                >
                   <User className="mr-2 h-5 w-5" />
                   Browse Professionals
                 </button>

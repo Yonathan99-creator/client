@@ -126,13 +126,6 @@ const ModuleCards: React.FC<ModuleCardsProps> = ({ onNavigate }) => {
                   </button>
                 </div>
 
-                {/* Floating elements on hover */}
-                <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                  <div className={`w-3 h-3 bg-gradient-to-r ${module.color} rounded-full animate-pulse`}></div>
-                </div>
-                <div className="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
-                  <div className={`w-2 h-2 bg-gradient-to-r ${module.color} rounded-full animate-bounce`}></div>
-                </div>
               </div>
             </div>
           ))}

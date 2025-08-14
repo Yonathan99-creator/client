@@ -3,7 +3,6 @@ import Hero from './Hero';
 import UpcomingAppointments from './UpcomingAppointments';
 import ModuleCards from './ModuleCards';
 import Features from './Features';
-import ProfessionalSearch from './ProfessionalSearch';
 import HowItWorks from './HowItWorks';
 import Testimonials from './Testimonials';
 import Footer from './Footer';
@@ -15,11 +14,10 @@ interface LandingProps {
 const Landing: React.FC<LandingProps> = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-900 transition-all duration-500">
-      <Hero />
-      <UpcomingAppointments />
+      <Hero onNavigate={onNavigate} />
+      <UpcomingAppointments onNavigate={onNavigate} />
       <ModuleCards onNavigate={onNavigate} />
       <Features />
-      <ProfessionalSearch />
       <HowItWorks />
       <Testimonials />
       <Footer />
