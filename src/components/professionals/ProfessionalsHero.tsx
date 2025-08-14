@@ -67,8 +67,6 @@ const ProfessionalsHero: React.FC = () => {
                   Search
                 </button>
               </div>
-              
-
             </div>
           </div>
 
@@ -93,27 +91,6 @@ const ProfessionalsHero: React.FC = () => {
               <Clock className="h-8 w-8 text-blue-600 dark:text-blue-400 mx-auto mb-3 group-hover:scale-110 transition-transform" />
               <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">&lt;2h</div>
               <div className="text-gray-600 dark:text-gray-400 text-sm font-medium">Response Time</div>
-            </div>
-          </div>
-          
-          {/* Featured categories preview */}
-          <div className="mt-16 animate-fade-in-up animation-delay-800">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Browse by Category</h3>
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-4 max-w-4xl mx-auto">
-              {[
-                { name: 'Healthcare', icon: '🏥', count: '2.5K+' },
-                { name: 'Legal', icon: '⚖️', count: '1.8K+' },
-                { name: 'Finance', icon: '💰', count: '1.2K+' },
-                { name: 'Therapy', icon: '🧠', count: '950+' },
-                { name: 'Education', icon: '📚', count: '1.5K+' },
-                { name: 'Business', icon: '💼', count: '2.1K+' }
-              ].map((category) => (
-                <button key={category.name} className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-sm rounded-xl p-4 hover:bg-white/60 dark:hover:bg-gray-800/60 transition-all duration-300 hover:scale-105 border border-white/20 dark:border-gray-700/20 group">
-                  <div className="text-2xl mb-2 group-hover:scale-110 transition-transform">{category.icon}</div>
-                  <div className="text-sm font-semibold text-gray-900 dark:text-white">{category.name}</div>
-                  <div className="text-xs text-gray-600 dark:text-gray-400">{category.count}</div>
-                </button>
-              ))}
             </div>
           </div>
         </div>
