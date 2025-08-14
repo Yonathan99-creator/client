@@ -142,11 +142,12 @@ const Navbar: React.FC = () => {
             <button
               onClick={toggleTheme}
               className="p-3 rounded-2xl hover:bg-white/60 dark:hover:bg-gray-800/60 transition-all duration-500 hover:scale-110 hover:shadow-xl group"
+              title={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
             >
               {isDark ? (
                 <Sun className="h-6 w-6 text-yellow-500 group-hover:rotate-180 group-hover:scale-125 transition-transform duration-700" />
               ) : (
-                <Moon className="h-6 w-6 text-gray-600 group-hover:rotate-180 group-hover:scale-125 transition-transform duration-700" />
+                <Moon className="h-6 w-6 text-gray-600 dark:text-gray-300 group-hover:rotate-180 group-hover:scale-125 transition-transform duration-700" />
               )}
             </button>
 

@@ -1,34 +1,53 @@
 import { useState, useEffect } from 'react';
 
 export const useTheme = () => {
-  // Detectar tema del sistema al inicializar
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  // Función para obtener el tema inicial
+  const getInitialTheme = (): boolean => {
+    if (typeof window === 'undefined') return false;
+    
+    // Primero verificar si hay una preferencia guardada
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      return savedTheme === 'dark';
     }
-    return false;
-  });
+    
+    // Si no hay preferencia guardada, usar la del sistema
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  };
 
+  const [isDark, setIsDark] = useState(getInitialTheme);
+
+  // Aplicar el tema al DOM
   useEffect(() => {
     const root = window.document.documentElement;
     
-    // Aplicar o remover la clase dark
     if (isDark) {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
+    
+    // Guardar la preferencia en localStorage
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
+  // Escuchar cambios en la preferencia del sistema solo si no hay preferencia guardada
   useEffect(() => {
-    // Escuchar cambios en la preferencia del sistema
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
     const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-      setIsDark(e.matches);
+      // Solo cambiar si no hay una preferencia manual guardada
+      const savedTheme = localStorage.getItem('theme');
+      if (!savedTheme) {
+        setIsDark(e.matches);
+      }
     };
 
-    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    // Solo agregar el listener si no hay preferencia guardada
+    const savedTheme = localStorage.getItem('theme');
+    if (!savedTheme) {
+      mediaQuery.addEventListener('change', handleSystemThemeChange);
+    }
     
     return () => {
       mediaQuery.removeEventListener('change', handleSystemThemeChange);
@@ -36,11 +55,19 @@ export const useTheme = () => {
   }, []);
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
+    setIsDark(prevIsDark => !prevIsDark);
+  };
+
+  // Función para resetear al tema del sistema
+  const resetToSystemTheme = () => {
+    localStorage.removeItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setIsDark(systemPrefersDark);
   };
 
   return { 
     isDark, 
-    toggleTheme
+    toggleTheme,
+    resetToSystemTheme
   };
 };
