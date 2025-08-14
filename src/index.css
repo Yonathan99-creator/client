@@ -213,33 +213,6 @@ html {
 }
 
 /* Dark mode transitions */
-* {
-  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
-}
-
-/* Transiciones específicas para elementos que cambian con el tema */
-.bg-white,
-.dark\\:bg-gray-800,
-.dark\\:bg-gray-900,
-.bg-gray-50,
-.dark\\:bg-gray-700,
-.text-gray-900,
-.dark\\:text-white,
-.text-gray-600,
-.dark\\:text-gray-300,
-.border-gray-200,
-.dark\\:border-gray-700 {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Transición suave para el root element */
-html {
-  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Evitar transiciones durante la carga inicial */
-.no-transition * {
-  transition: none !important;
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
