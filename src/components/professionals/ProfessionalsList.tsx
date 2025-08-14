@@ -243,16 +243,6 @@ const ProfessionalsList: React.FC = () => {
               <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
             </div>
 
-            {/* Quick filters toggle */}
-            <button
-              onClick={() => setShowQuickFilters(!showQuickFilters)}
-              className="flex items-center space-x-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 rounded-xl hover:bg-blue-200 dark:hover:bg-blue-900/30 transition-all duration-300"
-            >
-              <Filter className="h-4 w-4" />
-              <span>Filters</span>
-              {showQuickFilters && <span className="w-2 h-2 bg-blue-600 rounded-full"></span>}
-            </button>
-
             {/* View toggle */}
             <div className="flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1">
               <button
@@ -278,22 +268,6 @@ const ProfessionalsList: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Quick filters */}
-        {showQuickFilters && (
-          <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 shadow-lg border border-gray-200 dark:border-gray-700 animate-fade-in-up">
-            <div className="flex flex-wrap gap-3">
-              {['Available Now', 'Video Consultation', 'Top Rated', 'Under $150'].map((filter) => (
-                <button
-                  key={filter}
-                  className="px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900/20 text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-300 rounded-lg transition-all duration-300 text-sm font-medium hover:scale-105"
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Professionals grid */}
         <div className={`grid gap-6 ${viewMode === 'grid' ? 'md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
