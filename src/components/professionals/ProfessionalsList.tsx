@@ -346,7 +346,6 @@ const ProfessionalsList: React.FC = () => {
                           <span key={langIndex} className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 px-2 py-1 rounded mr-1">{lang}</span>
                         ))}
                       </div>
-                      </p>
                     </div>
                   </div>
                   {viewMode === 'grid' && (
@@ -366,8 +365,8 @@ const ProfessionalsList: React.FC = () => {
                 </div>
               </div>
 
-              {/* Professional details */}
               <div className={`${viewMode === 'list' ? 'flex-1' : ''} relative z-10`}>
+                {/* Professional details */}
                 {/* Rating and price */}
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-2">
