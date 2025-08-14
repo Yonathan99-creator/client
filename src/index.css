@@ -2,6 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Root variables for consistent theming */
+:root {
+  --color-primary: 59 130 246;
+  --color-secondary: 168 85 247;
+  --color-accent: 16 185 129;
+  --color-surface: 255 255 255;
+  --color-background: 249 250 251;
+  --color-text: 17 24 39;
+  --color-text-secondary: 107 114 128;
+  --color-border: 229 231 235;
+  --shadow-color: 0 0 0;
+  --shadow-opacity: 0.1;
+}
+
+.dark {
+  --color-primary: 96 165 250;
+  --color-secondary: 192 132 252;
+  --color-accent: 52 211 153;
+  --color-surface: 31 41 55;
+  --color-background: 17 24 39;
+  --color-text: 249 250 251;
+  --color-text-secondary: 156 163 175;
+  --color-border: 55 65 81;
+  --shadow-color: 0 0 0;
+  --shadow-opacity: 0.3;
+}
+
+/* Base styles with improved colors */
+@layer base {
+  body {
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-gray-500;
+  }
+}
+
 /* Custom animations */
 @keyframes fade-in-up {
   from {
@@ -127,6 +179,26 @@
   }
 }
 
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(var(--color-primary), 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(var(--color-primary), 0.6);
+  }
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Animation classes */
+
 .animate-fade-in-up {
   animation: fade-in-up 0.6s ease-out forwards;
 }
@@ -165,6 +237,14 @@
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-text-shimmer {
+  animation: text-shimmer 2s ease-in-out infinite;
 }
 
 .bg-size-200 {
@@ -212,14 +292,33 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Dark mode transitions */
-body {
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* Enhanced transitions */
+* {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Mejorar las transiciones para el modo oscuro */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+/* Custom utility classes */
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 via-secondary-600 to-primary-600 bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: gradient-x 3s ease infinite;
+  }
+  
+  .bg-glass {
+    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl;
+  }
+  
+  .bg-glass-light {
+    @apply bg-white/60 dark:bg-gray-800/60 backdrop-blur-lg;
+  }
+  
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(var(--color-primary), var(--shadow-opacity));
+  }
 }
 
 /* Asegurar que las transiciones se apliquen a todos los elementos */
