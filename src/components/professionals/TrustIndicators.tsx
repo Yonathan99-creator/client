@@ -121,30 +121,6 @@ const TrustIndicators: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Security badges */}
-        <div className="mt-16 text-center animate-fade-in-up">
-          <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Secured & Certified By</h4>
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60 hover:opacity-100 transition-opacity duration-300">
-            {/* Mock security badges */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md border border-gray-200 dark:border-gray-700">
-              <div className="text-2xl font-bold text-gray-800 dark:text-gray-200">SSL</div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">256-bit Encryption</div>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md border border-gray-200 dark:border-gray-700">
-              <div className="text-2xl font-bold text-gray-800 dark:text-gray-200">GDPR</div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">Compliant</div>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md border border-gray-200 dark:border-gray-700">
-              <div className="text-2xl font-bold text-gray-800 dark:text-gray-200">ISO</div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">27001 Certified</div>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md border border-gray-200 dark:border-gray-700">
-              <div className="text-2xl font-bold text-gray-800 dark:text-gray-200">SOC</div>
-              <div className="text-xs text-gray-600 dark:text-gray-400">Type 2</div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
