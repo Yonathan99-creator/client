@@ -5,6 +5,7 @@ import Landing from './components/landing/Landing';
 import ProfessionalsPage from './components/professionals/ProfessionalsPage';
 import AppointmentsPage from './components/appointments/AppointmentsPage';
 import ReviewsPage from './components/reviews/ReviewsPage';
+import PaymentsPage from './components/payments/PaymentsPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -17,6 +18,8 @@ function App() {
     switch (currentPage) {
       case 'professionals':
         return <ProfessionalsPage />;
+      case 'payments':
+        return <PaymentsPage />;
       case 'appointments':
         return <AppointmentsPage />;
       case 'reviews':

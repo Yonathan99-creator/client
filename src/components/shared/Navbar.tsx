@@ -26,6 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onNavigate }) => 
   const navItems = [
     { name: 'Home', href: 'home', icon: Home },
     { name: 'Professionals', href: 'professionals', icon: User },
+    { name: 'Payments', href: 'payments', icon: CreditCard },
     { name: 'Appointments', href: 'appointments', icon: Calendar },
     { name: 'Reviews', href: 'reviews', icon: Star },
   ];
