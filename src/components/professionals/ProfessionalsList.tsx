@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Star, Heart, CheckCircle, Calendar, Clock, MapPin, ChevronDown, Grid, List, Award, MessageCircle, Video, Phone, Zap, TrendingUp, Filter } from 'lucide-react';
+import { Star, Heart, CheckCircle, Calendar, Clock, MapPin, Grid, List, Award, MessageCircle, Video, Phone, Zap, TrendingUp } from 'lucide-react';
 
 const ProfessionalsList: React.FC = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [sortBy, setSortBy] = useState('rating');
   const [favorites, setFavorites] = useState<number[]>([]);
-  const [showQuickFilters, setShowQuickFilters] = useState(false);
 
   const professionals = [
     {
@@ -130,13 +128,6 @@ const ProfessionalsList: React.FC = () => {
     }
   ];
 
-  const sortOptions = [
-    { value: 'rating', label: 'Highest Rated' },
-    { value: 'price-low', label: 'Price: Low to High' },
-    { value: 'price-high', label: 'Price: High to Low' },
-    { value: 'availability', label: 'Availability' }
-  ];
-
   const toggleFavorite = (id: number) => {
     setFavorites(prev => 
       prev.includes(id) 
@@ -227,22 +218,6 @@ const ProfessionalsList: React.FC = () => {
           </div>
 
           <div className="flex items-center space-x-4 mt-4 lg:mt-0">
-            {/* Sort */}
-            <div className="relative">
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="appearance-none bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                {sortOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none" />
-            </div>
-
             {/* View toggle */}
             <div className="flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1">
               <button
