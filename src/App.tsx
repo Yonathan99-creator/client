@@ -25,7 +25,7 @@ function App() {
       case 'reviews':
         return <ReviewsPage />;
       default:
-        return <Landing />;
+        return <Landing onNavigate={handleNavigation} />;
     }
   };
 

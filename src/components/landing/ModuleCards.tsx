@@ -1,7 +1,11 @@
 import React from 'react';
 import { User, CreditCard, Star, Calendar, ArrowRight, Sparkles, Shield, Clock } from 'lucide-react';
 
-const ModuleCards: React.FC = () => {
+interface ModuleCardsProps {
+  onNavigate?: (page: string) => void;
+}
+
+const ModuleCards: React.FC<ModuleCardsProps> = ({ onNavigate }) => {
   const modules = [
     {
       id: 'professionals',
@@ -70,6 +74,7 @@ const ModuleCards: React.FC = () => {
               key={module.id}
               className="group bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-6 hover:scale-105 border border-gray-200 dark:border-gray-700 animate-fade-in-up relative overflow-hidden cursor-pointer"
               style={{ animationDelay: `${module.delay}ms` }}
+              onClick={() => onNavigate && onNavigate(module.id)}
             >
               {/* Background gradient on hover */}
               <div className={`absolute inset-0 bg-gradient-to-br ${module.bgColor} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}></div>
@@ -109,7 +114,13 @@ const ModuleCards: React.FC = () => {
 
                 {/* Explore button - appears on hover */}
                 <div className="opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                  <button className={`inline-flex items-center px-6 py-3 bg-gradient-to-r ${module.color} text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 group/btn`}>
+                  <button 
+                    className={`inline-flex items-center px-6 py-3 bg-gradient-to-r ${module.color} text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105 group/btn`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onNavigate && onNavigate(module.id);
+                    }}
+                  >
                     <span>Explore Module</span>
                     <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                   </button>

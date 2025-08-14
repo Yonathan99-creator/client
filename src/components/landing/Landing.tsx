@@ -8,12 +8,16 @@ import HowItWorks from './HowItWorks';
 import Testimonials from './Testimonials';
 import Footer from './Footer';
 
-const Landing: React.FC = () => {
+interface LandingProps {
+  onNavigate?: (page: string) => void;
+}
+
+const Landing: React.FC<LandingProps> = ({ onNavigate }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-900 transition-all duration-500">
       <Hero />
       <UpcomingAppointments />
-      <ModuleCards />
+      <ModuleCards onNavigate={onNavigate} />
       <Features />
       <ProfessionalSearch />
       <HowItWorks />
