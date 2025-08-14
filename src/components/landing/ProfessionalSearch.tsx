@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-+import { Search, MapPin, Star, Clock, Calendar, Filter, Heart, Award, CheckCircle } from 'lucide-react';
-+
-+const ProfessionalSearch: React.FC = () => {
+import { Search, MapPin, Star, Clock, Calendar, Filter, Heart, Award, CheckCircle } from 'lucide-react';
+
+const ProfessionalSearch: React.FC = () => {
 +  const [selectedCategory, setSelectedCategory] = useState('All');
 +  const [favorites, setFavorites] = useState<number[]>([]);
 +

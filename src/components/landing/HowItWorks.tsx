@@ -1,7 +1,7 @@
 import React from 'react';
-+import { Search, UserCheck, Calendar, CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
-+
-+const HowItWorks: React.FC = () => {
+import { Search, UserCheck, Calendar, CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
+
+const HowItWorks: React.FC = () => {
 +  const steps = [
 +    {
 +      icon: Search,

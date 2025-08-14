@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-+import { Star, Quote, ChevronLeft, ChevronRight, Play, Award } from 'lucide-react';
-+
-+const Testimonials: React.FC = () => {
+import { Star, Quote, ChevronLeft, ChevronRight, Play, Award } from 'lucide-react';
+
+const Testimonials: React.FC = () => {
 +  const [currentTestimonial, setCurrentTestimonial] = useState(0);
 +  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 +
