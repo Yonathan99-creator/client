@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from './Navbar';
 import Hero from './Hero';
 import UpcomingAppointments from './UpcomingAppointments';
 import ModuleCards from './ModuleCards';
@@ -12,7 +11,6 @@ import Footer from './Footer';
 const Landing: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-900 transition-all duration-500">
-      <Navbar />
       <Hero />
       <UpcomingAppointments />
       <ModuleCards />

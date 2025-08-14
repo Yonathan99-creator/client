@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Search, User, LogIn, Moon, Sun, Calendar, Menu, X, Bell, ChevronDown, Settings, LogOut } from 'lucide-react';
+import { Search, User, LogIn, Moon, Sun, Calendar, Menu, X, Bell, ChevronDown, Settings, LogOut, Home } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  currentPage?: string;
+  onNavigate?: (page: string) => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -19,10 +24,9 @@ const Navbar: React.FC = () => {
   }, []);
 
   const navItems = [
-    { name: 'Professionals', href: '#professionals', icon: User },
-    { name: 'Payments', href: '#payments', icon: Calendar },
-    { name: 'Reviews', href: '#reviews', icon: Search },
-    { name: 'Appointments', href: '#appointments', icon: Calendar },
+    { name: 'Home', href: 'home', icon: Home },
+    { name: 'Professionals', href: 'professionals', icon: User },
+    { name: 'Appointments', href: 'appointments', icon: Calendar },
   ];
 
   const notifications = [
@@ -32,6 +36,13 @@ const Navbar: React.FC = () => {
   ];
 
   const unreadCount = notifications.filter(n => n.unread).length;
+
+  const handleNavigation = (page: string) => {
+    if (onNavigate) {
+      onNavigate(page);
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
@@ -43,13 +54,9 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <a 
-              href="/" 
+            <button 
+              onClick={() => handleNavigation('home')}
               className="flex items-center space-x-3 group"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
             >
               <div className="relative">
                 <Calendar className="h-12 w-12 text-primary-600 dark:text-primary-400 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500" />
@@ -58,23 +65,29 @@ const Navbar: React.FC = () => {
               <span className="text-3xl font-bold text-gradient">
                 ProBooking
               </span>
-            </a>
+            </button>
           </div>
 
           {/* Navigation Items */}
           <div className="hidden lg:block">
             <div className="ml-10 flex items-center space-x-2">
               {navItems.map((item, index) => (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
-                  className="relative text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-500 hover:bg-white/60 dark:hover:bg-gray-800/60 hover:shadow-xl hover:scale-110 group animate-fade-in-up"
+                  onClick={() => handleNavigation(item.href)}
+                  className={`relative px-6 py-3 rounded-2xl text-sm font-semibold transition-all duration-500 hover:bg-white/60 dark:hover:bg-gray-800/60 hover:shadow-xl hover:scale-110 group animate-fade-in-up ${
+                    currentPage === item.href
+                      ? 'text-primary-600 dark:text-primary-400 bg-white/60 dark:bg-gray-800/60'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
+                  }`}
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <item.icon className="h-4 w-4 inline mr-2 group-hover:scale-125 transition-transform duration-300" />
                   {item.name}
-                  <div className="absolute bottom-0 left-1/2 w-0 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 group-hover:w-full group-hover:left-0 transition-all duration-500 rounded-full"></div>
-                </a>
+                  <div className={`absolute bottom-0 left-1/2 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 group-hover:w-full group-hover:left-0 transition-all duration-500 rounded-full ${
+                    currentPage === item.href ? 'w-full left-0' : 'w-0'
+                  }`}></div>
+                </button>
               ))}
             </div>
           </div>
@@ -142,7 +155,7 @@ const Navbar: React.FC = () => {
             <button
               onClick={toggleTheme}
               className="p-3 rounded-2xl hover:bg-white/60 dark:hover:bg-gray-800/60 transition-all duration-500 hover:scale-110 hover:shadow-xl group border border-transparent hover:border-gray-200/50 dark:hover:border-gray-700/50"
-              title={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDark ? (
                 <Sun className="h-6 w-6 text-yellow-500 group-hover:rotate-180 group-hover:scale-125 transition-transform duration-700" />
@@ -210,15 +223,18 @@ const Navbar: React.FC = () => {
           <div className="lg:hidden mt-4 pb-4 animate-fade-in-up">
             <div className="flex flex-col space-y-2">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
-                  className="flex items-center px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-white/60 dark:hover:bg-gray-800/60 rounded-2xl transition-all duration-500"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => handleNavigation(item.href)}
+                  className={`flex items-center px-4 py-3 rounded-2xl transition-all duration-500 ${
+                    currentPage === item.href
+                      ? 'text-primary-600 dark:text-primary-400 bg-white/60 dark:bg-gray-800/60'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-white/60 dark:hover:bg-gray-800/60'
+                  }`}
                 >
                   <item.icon className="h-4 w-4 mr-3" />
                   {item.name}
-                </a>
+                </button>
               ))}
             </div>
           </div>
