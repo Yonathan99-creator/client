@@ -84,9 +84,12 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage = 'home', onNavigate }) => 
                 >
                   <item.icon className="h-4 w-4 inline mr-2 group-hover:scale-125 transition-transform duration-300" />
                   {item.name}
-                  <div className={`absolute bottom-0 left-1/2 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 group-hover:w-full group-hover:left-0 transition-all duration-500 rounded-full ${
-                    currentPage === item.href ? 'w-full left-0' : 'w-0'
-                  }`}></div>
+                  {/* Indicador activo */}
+                  {currentPage === item.href && (
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-full animate-fade-in-up"></div>
+                  )}
+                  {/* Indicador hover */}
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-1 bg-gradient-to-r from-primary-600 to-secondary-600 rounded-full w-0 group-hover:w-full transition-all duration-300 opacity-50"></div>
                 </button>
               ))}
             </div>
