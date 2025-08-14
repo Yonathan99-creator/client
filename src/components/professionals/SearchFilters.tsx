@@ -5,52 +5,19 @@ const SearchFilters: React.FC = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [priceRange, setPriceRange] = useState(500);
-  const [minRating, setMinRating] = useState(0);
-  const [availability, setAvailability] = useState('');
-  const [consultationType, setConsultationType] = useState('');
-  const [experience, setExperience] = useState('');
 
   const categories = [
     'All', 'Healthcare', 'Legal', 'Finance', 'Therapy', 'Consulting', 'Education'
   ];
 
-  const availabilityOptions = [
-    { value: '', label: 'Any time' },
-    { value: 'now', label: 'Available now' },
-    { value: 'today', label: 'Available today' },
-    { value: 'week', label: 'This week' }
-  ];
-
-  const consultationTypes = [
-    { value: '', label: 'Any type' },
-    { value: 'video', label: 'Video call' },
-    { value: 'phone', label: 'Phone call' },
-    { value: 'person', label: 'In person' }
-  ];
-
-  const experienceOptions = [
-    { value: '', label: 'Any experience' },
-    { value: '1-5', label: '1-5 years' },
-    { value: '5-10', label: '5-10 years' },
-    { value: '10+', label: '10+ years' }
-  ];
-
   const clearFilters = () => {
     setSelectedCategory('All');
     setPriceRange(500);
-    setMinRating(0);
-    setAvailability('');
-    setConsultationType('');
-    setExperience('');
   };
 
   const activeFiltersCount = [
     selectedCategory !== 'All',
-    priceRange < 500,
-    minRating > 0,
-    availability !== '',
-    consultationType !== '',
-    experience !== ''
+    priceRange < 500
   ].filter(Boolean).length;
 
   return (
@@ -59,7 +26,6 @@ const SearchFilters: React.FC = () => {
         {/* Popular searches */}
         <div className="mb-6 text-center">
           <div className="inline-flex items-center space-x-4 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl px-6 py-3 border border-gray-200/50 dark:border-gray-700/50">
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Trending:</span>
             {['Therapists near me', 'Online doctors', 'Business lawyers', 'Math tutors'].map((search, index) => (
               <button key={index} className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
                 {search}
@@ -147,31 +113,6 @@ const SearchFilters: React.FC = () => {
                 </div>
               </div>
 
-              {/* Rating */}
-              <div className="space-y-3">
-                <label className="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white">
-                  <Star className="h-4 w-4 text-yellow-500" />
-                  <span>Minimum Rating</span>
-                </label>
-                <div className="bg-gradient-to-r from-yellow-100 to-orange-100 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-lg p-3">
-                <div className="flex space-x-1">
-                  {[1, 2, 3, 4, 5].map((rating) => (
-                    <button
-                      key={rating}
-                      onClick={() => setMinRating(rating)}
-                        className={`p-2 rounded-lg transition-all duration-300 hover:scale-125 ${
-                        minRating >= rating
-                            ? 'text-yellow-400 bg-yellow-50 dark:bg-yellow-900/30'
-                            : 'text-gray-300 dark:text-gray-600 hover:text-yellow-400 hover:bg-yellow-50 dark:hover:bg-yellow-900/20'
-                      }`}
-                    >
-                      <Star className={`h-5 w-5 ${minRating >= rating ? 'fill-current' : ''}`} />
-                    </button>
-                  ))}
-                </div>
-                </div>
-              </div>
-
               {/* Availability */}
               <div className="space-y-3">
                 <label className="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -179,15 +120,12 @@ const SearchFilters: React.FC = () => {
                   <span>Availability</span>
                 </label>
                 <select
-                  value={availability}
-                  onChange={(e) => setAvailability(e.target.value)}
                   className="w-full p-3 bg-gradient-to-r from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 border border-green-200 dark:border-green-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 hover:shadow-md"
                 >
-                  {availabilityOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
+                  <option value="">Any time</option>
+                  <option value="now">Available now</option>
+                  <option value="today">Available today</option>
+                  <option value="week">This week</option>
                 </select>
               </div>
               
@@ -198,35 +136,42 @@ const SearchFilters: React.FC = () => {
                   <span>Consultation Type</span>
                 </label>
                 <select
-                  value={consultationType}
-                  onChange={(e) => setConsultationType(e.target.value)}
                   className="w-full p-3 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border border-purple-200 dark:border-purple-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 hover:shadow-md"
                 >
-                  {consultationTypes.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
+                  <option value="">Any type</option>
+                  <option value="video">Video call</option>
+                  <option value="phone">Phone call</option>
+                  <option value="person">In person</option>
                 </select>
               </div>
               
-              {/* Experience Level */}
+              {/* Rating */}
               <div className="space-y-3">
                 <label className="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white">
-                  <Users className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-                  <span>Experience</span>
+                  <Star className="h-4 w-4 text-yellow-500" />
+                  <span>Minimum Rating</span>
                 </label>
                 <select
-                  value={experience}
-                  onChange={(e) => setExperience(e.target.value)}
-                  className="w-full p-3 bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 border border-indigo-200 dark:border-indigo-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300 hover:shadow-md"
+                  className="w-full p-3 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border border-yellow-200 dark:border-yellow-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300 hover:shadow-md"
                 >
-                  {experienceOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
+                  <option value="">Any rating</option>
+                  <option value="4">4+ stars</option>
+                  <option value="4.5">4.5+ stars</option>
+                  <option value="4.8">4.8+ stars</option>
                 </select>
+              </div>
+              
+              {/* Location */}
+              <div className="space-y-3">
+                <label className="flex items-center space-x-2 text-sm font-medium text-gray-900 dark:text-white">
+                  <MapPin className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+                  <span>Location</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter city or zip code"
+                  className="w-full p-3 bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 border border-indigo-200 dark:border-indigo-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300 hover:shadow-md"
+                />
               </div>
             </div>
             

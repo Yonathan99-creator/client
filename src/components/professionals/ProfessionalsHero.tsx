@@ -70,7 +70,6 @@ const ProfessionalsHero: React.FC = () => {
               
               {/* Popular searches */}
               <div className="mt-4 flex flex-wrap justify-center gap-2">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Popular:</span>
                 {['Doctors', 'Lawyers', 'Therapists', 'Tutors', 'Consultants'].map((term) => (
                   <button key={term} className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline">
                     {term}

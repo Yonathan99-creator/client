@@ -249,7 +249,7 @@ const ProfessionalsList: React.FC = () => {
               className="flex items-center space-x-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300 rounded-xl hover:bg-blue-200 dark:hover:bg-blue-900/30 transition-all duration-300"
             >
               <Filter className="h-4 w-4" />
-              <span>Quick Filters</span>
+              <span>Filters</span>
               {showQuickFilters && <span className="w-2 h-2 bg-blue-600 rounded-full"></span>}
             </button>
 
@@ -283,8 +283,7 @@ const ProfessionalsList: React.FC = () => {
         {showQuickFilters && (
           <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-8 shadow-lg border border-gray-200 dark:border-gray-700 animate-fade-in-up">
             <div className="flex flex-wrap gap-3">
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300 mr-4">Quick Filters:</span>
-              {['Available Now', 'Video Consultation', 'Top Rated', 'Under $150', 'Quick Response', 'New Professionals'].map((filter) => (
+              {['Available Now', 'Video Consultation', 'Top Rated', 'Under $150'].map((filter) => (
                 <button
                   key={filter}
                   className="px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900/20 text-gray-700 dark:text-gray-300 hover:text-blue-800 dark:hover:text-blue-300 rounded-lg transition-all duration-300 text-sm font-medium hover:scale-105"
