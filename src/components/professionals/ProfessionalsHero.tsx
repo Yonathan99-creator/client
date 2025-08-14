@@ -68,14 +68,7 @@ const ProfessionalsHero: React.FC = () => {
                 </button>
               </div>
               
-              {/* Popular searches */}
-              <div className="mt-4 flex flex-wrap justify-center gap-2">
-                {['Doctors', 'Lawyers', 'Therapists', 'Tutors', 'Consultants'].map((term) => (
-                  <button key={term} className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline">
-                    {term}
-                  </button>
-                ))}
-              </div>
+
             </div>
           </div>
 
