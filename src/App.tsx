@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Navbar from './components/shared/Navbar';
 import Landing from './components/landing/Landing';
 import ProfessionalsPage from './components/professionals/ProfessionalsPage';
+import AppointmentsPage from './components/appointments/AppointmentsPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -16,9 +17,7 @@ function App() {
       case 'professionals':
         return <ProfessionalsPage />;
       case 'appointments':
-        return <div className="min-h-screen pt-20 flex items-center justify-center">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Appointments Page Coming Soon</h1>
-        </div>;
+        return <AppointmentsPage />;
       default:
         return <Landing />;
     }
