@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, User, LogIn, Moon, Sun, Calendar, Menu, X, Bell, ChevronDown, Settings, LogOut, Home, Star } from 'lucide-react';
+import { Search, User, LogIn, Moon, Sun, Calendar, Menu, X, Bell, ChevronDown, Settings, LogOut, Home, Star, CreditCard } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 
 interface NavbarProps {
