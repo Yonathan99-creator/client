@@ -118,13 +118,6 @@ const HowItWorks: React.FC = () => {
             ))}
           </div>
         </div>
-
-        {/* Call to action */}
-        <div className="text-center mt-16 animate-fade-in-up animation-delay-800">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white relative overflow-hidden">
-            
-          </div>
-        </div>
       </div>
     </section>
   );
