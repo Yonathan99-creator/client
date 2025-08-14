@@ -215,24 +215,6 @@ const Testimonials: React.FC = () => {
             </span>
           </button>
         </div>
-
-        {/* Stats */}
-        <div className="grid md:grid-cols-3 gap-8 animate-fade-in-up">
-          <div className="text-center bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:scale-105">
-            <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">98%</div>
-            <div className="text-gray-600 dark:text-gray-400">Client Satisfaction</div>
-          </div>
-          
-          <div className="text-center bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:scale-105">
-            <div className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">50K+</div>
-            <div className="text-gray-600 dark:text-gray-400">Happy Clients</div>
-          </div>
-          
-          <div className="text-center bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:scale-105">
-            <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">4.9</div>
-            <div className="text-gray-600 dark:text-gray-400">Average Rating</div>
-          </div>
-        </div>
       </div>
     </section>
   );
