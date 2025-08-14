@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, User, LogIn, Moon, Sun, Calendar, Menu, X, Bell, ChevronDown, Settings, LogOut } from 'lucide-react';
+import { Search, User, LogIn, Moon, Sun, Calendar, Menu, X, Bell, ChevronDown, Settings, LogOut, Monitor } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 
 const Navbar: React.FC = () => {
@@ -7,7 +7,8 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
-  const { isDark, toggleTheme } = useTheme();
+  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
+  const { isDark, themePreference, toggleTheme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +33,21 @@ const Navbar: React.FC = () => {
   ];
 
   const unreadCount = notifications.filter(n => n.unread).length;
+
+  const getThemeIcon = () => {
+    switch (themePreference) {
+      case 'light':
+        return Sun;
+      case 'dark':
+        return Moon;
+      case 'system':
+        return Monitor;
+      default:
+        return isDark ? Moon : Sun;
+    }
+  };
+
+  const ThemeIcon = getThemeIcon();
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
@@ -139,16 +155,62 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-3 rounded-2xl hover:bg-white/60 dark:hover:bg-gray-800/60 transition-all duration-500 hover:scale-110 hover:shadow-xl group"
-            >
-              {isDark ? (
-                <Sun className="h-6 w-6 text-yellow-500 group-hover:rotate-180 group-hover:scale-125 transition-transform duration-700" />
-              ) : (
-                <Moon className="h-6 w-6 text-gray-600 group-hover:rotate-180 group-hover:scale-125 transition-transform duration-700" />
+            <div className="relative">
+              <button
+                onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
+                className="p-3 rounded-2xl hover:bg-white/60 dark:hover:bg-gray-800/60 transition-all duration-500 hover:scale-110 hover:shadow-xl group"
+              >
+                <ThemeIcon className={`h-6 w-6 group-hover:rotate-180 group-hover:scale-125 transition-transform duration-700 ${
+                  themePreference === 'light' ? 'text-yellow-500' :
+                  themePreference === 'dark' ? 'text-blue-400' :
+                  'text-gray-600 dark:text-gray-300'
+                }`} />
+              </button>
+
+              {/* Theme Menu */}
+              {isThemeMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 animate-fade-in-up z-50">
+                  <div className="p-2">
+                    <button
+                      onClick={() => {
+                        setTheme('light');
+                        setIsThemeMenuOpen(false);
+                      }}
+                      className={`flex items-center w-full px-4 py-3 text-left rounded-xl transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-700 ${
+                        themePreference === 'light' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' : 'text-gray-700 dark:text-gray-300'
+                      }`}
+                    >
+                      <Sun className="h-5 w-5 mr-3" />
+                      Claro
+                    </button>
+                    <button
+                      onClick={() => {
+                        setTheme('dark');
+                        setIsThemeMenuOpen(false);
+                      }}
+                      className={`flex items-center w-full px-4 py-3 text-left rounded-xl transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-700 ${
+                        themePreference === 'dark' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' : 'text-gray-700 dark:text-gray-300'
+                      }`}
+                    >
+                      <Moon className="h-5 w-5 mr-3" />
+                      Oscuro
+                    </button>
+                    <button
+                      onClick={() => {
+                        setTheme('system');
+                        setIsThemeMenuOpen(false);
+                      }}
+                      className={`flex items-center w-full px-4 py-3 text-left rounded-xl transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-700 ${
+                        themePreference === 'system' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' : 'text-gray-700 dark:text-gray-300'
+                      }`}
+                    >
+                      <Monitor className="h-5 w-5 mr-3" />
+                      Sistema
+                    </button>
+                  </div>
+                </div>
               )}
-            </button>
+            </div>
 
             {/* Profile Menu */}
             <div className="relative">
