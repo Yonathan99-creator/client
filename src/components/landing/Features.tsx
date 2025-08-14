@@ -116,19 +116,6 @@ const Features: React.FC = () => {
                 backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`
               }}></div>
             </div>
-            
-            <div className="relative z-10">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                Ready to Experience the Difference?
-              </h3>
-              <p className="text-blue-100 mb-8 max-w-2xl mx-auto text-lg">
-                Join thousands of clients who trust ProBooking for their professional service needs
-              </p>
-              <button className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-gray-50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl group">
-                Get Started Today
-                <Calendar className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              </button>
-            </div>
           </div>
         </div>
       </div>
