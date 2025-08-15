@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Star, Award, Clock, MapPin, Video, Phone, ChevronLeft, ChevronRight, Calendar, Heart, CheckCircle } from 'lucide-react';
 
-const FeaturedProfessionals: React.FC = () => {
+interface FeaturedProfessionalsProps {
+  onNavigate?: (page: string) => void;
+}
+
+const FeaturedProfessionals: React.FC<FeaturedProfessionalsProps> = ({ onNavigate }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [favorites, setFavorites] = useState<number[]>([]);
 
@@ -293,7 +297,12 @@ const FeaturedProfessionals: React.FC = () => {
                               Book Now
                             </button>
                             <button className="px-4 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition-all duration-300 hover:scale-105">
-                              View Profile
+                              <button 
+                                onClick={() => onNavigate && onNavigate('profile')}
+                                className="px-4 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition-all duration-300 hover:scale-105"
+                              >
+                                View Profile
+                              </button>
                             </button>
                           </div>
                         </div>

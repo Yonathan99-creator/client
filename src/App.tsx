@@ -6,6 +6,7 @@ import ProfessionalsPage from './components/professionals/ProfessionalsPage';
 import AppointmentsPage from './components/appointments/AppointmentsPage';
 import ReviewsPage from './components/reviews/ReviewsPage';
 import PaymentsPage from './components/payments/PaymentsPage';
+import ProfilesPage from './components/profiles/ProfilesPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -17,7 +18,9 @@ function App() {
   const renderCurrentPage = () => {
     switch (currentPage) {
       case 'professionals':
-        return <ProfessionalsPage />;
+        return <ProfessionalsPage onNavigate={handleNavigation} />;
+      case 'profile':
+        return <ProfilesPage />;
       case 'payments':
         return <PaymentsPage />;
       case 'appointments':

@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Star, Heart, CheckCircle, Calendar, Clock, MapPin, Grid, List, Award, MessageCircle, Video, Phone, Zap, TrendingUp } from 'lucide-react';
 
-const ProfessionalsList: React.FC = () => {
+interface ProfessionalsListProps {
+  onNavigate?: (page: string) => void;
+}
+
+const ProfessionalsList: React.FC<ProfessionalsListProps> = ({ onNavigate }) => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [favorites, setFavorites] = useState<number[]>([]);
 
@@ -403,7 +407,12 @@ const ProfessionalsList: React.FC = () => {
                     Message
                   </button>
                   <button className="px-4 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition-all duration-300 hover:scale-105">
-                    Profile
+                    <button 
+                      onClick={() => onNavigate && onNavigate('profile')}
+                      className="px-4 py-3 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition-all duration-300 hover:scale-105"
+                    >
+                      Profile
+                    </button>
                   </button>
                   {viewMode === 'list' && (
                     <button
