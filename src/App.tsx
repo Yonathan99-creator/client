@@ -21,7 +21,7 @@ function App() {
       case 'professionals':
         return <ProfessionalsPage onNavigate={handleNavigation} />;
       case 'profile':
-        return <ProfilesPage />;
+        return <ProfilesPage onNavigate={handleNavigation} />;
       case 'payments':
         return <PaymentsPage />;
       case 'appointments':

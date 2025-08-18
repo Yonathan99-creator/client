@@ -292,7 +292,10 @@ const FeaturedProfessionals: React.FC<FeaturedProfessionalsProps> = ({ onNavigat
 
                           {/* Action buttons */}
                           <div className="flex space-x-3">
-                            <button className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/btn">
+                            <button 
+                              onClick={() => onNavigate && onNavigate('booking')}
+                              className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/btn"
+                            >
                               <Calendar className="h-4 w-4 inline mr-2 group-hover/btn:animate-bounce" />
                               Book Now
                             </button>

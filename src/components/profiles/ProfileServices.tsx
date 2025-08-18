@@ -3,9 +3,10 @@ import { Heart, Stethoscope, Activity, Shield, Clock, DollarSign, Calendar, Chec
 
 interface ProfileServicesProps {
   professionalId: number;
+  onNavigate?: (page: string) => void;
 }
 
-const ProfileServices: React.FC<ProfileServicesProps> = ({ professionalId }) => {
+const ProfileServices: React.FC<ProfileServicesProps> = ({ professionalId, onNavigate }) => {
   const [selectedService, setSelectedService] = useState<number | null>(null);
 
   // Mock data
@@ -228,7 +229,10 @@ const ProfileServices: React.FC<ProfileServicesProps> = ({ professionalId }) => 
 
                 {/* Action Buttons */}
                 <div className="flex space-x-4">
-                  <button className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/btn">
+                  <button 
+                    onClick={() => onNavigate && onNavigate('booking')}
+                    className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/btn"
+                  >
                     <Calendar className="h-4 w-4 inline mr-2 group-hover/btn:animate-bounce" />
                     Book Now
                   </button>
@@ -266,10 +270,16 @@ const ProfileServices: React.FC<ProfileServicesProps> = ({ professionalId }) => 
                 Every patient is unique. Let's discuss your specific needs and create a personalized treatment approach.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 bg-white text-indigo-600 font-semibold rounded-xl hover:bg-gray-50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                <button 
+                  onClick={() => onNavigate && onNavigate('booking')}
+                  className="px-8 py-4 bg-white text-indigo-600 font-semibold rounded-xl hover:bg-gray-50 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                >
                   Schedule Consultation
                 </button>
-                <button className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-indigo-600 transition-all duration-300 hover:scale-105">
+                <button 
+                  onClick={() => onNavigate && onNavigate('booking')}
+                  className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-indigo-600 transition-all duration-300 hover:scale-105"
+                >
                   Contact Dr. Chen
                 </button>
               </div>

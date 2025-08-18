@@ -3,9 +3,10 @@ import { Star, Calendar, MapPin, Video, Phone, Heart, Award, Users, TrendingUp, 
 
 interface RelatedProfessionalsProps {
   professionalId: number;
+  onNavigate?: (page: string) => void;
 }
 
-const RelatedProfessionals: React.FC<RelatedProfessionalsProps> = ({ professionalId }) => {
+const RelatedProfessionals: React.FC<RelatedProfessionalsProps> = ({ professionalId, onNavigate }) => {
   const [favorites, setFavorites] = useState<number[]>([]);
 
   // Mock related professionals data
@@ -237,7 +238,10 @@ const RelatedProfessionals: React.FC<RelatedProfessionalsProps> = ({ professiona
 
                 {/* Action buttons */}
                 <div className="flex space-x-3">
-                  <button className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/btn">
+                  <button 
+                    onClick={() => onNavigate && onNavigate('booking')}
+                    className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group/btn"
+                  >
                     <Calendar className="h-4 w-4 inline mr-2 group-hover/btn:animate-bounce" />
                     Book Now
                   </button>

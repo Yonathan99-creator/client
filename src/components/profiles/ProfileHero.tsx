@@ -3,9 +3,10 @@ import { Star, MapPin, Calendar, Clock, Heart, Share2, MessageCircle, Video, Pho
 
 interface ProfileHeroProps {
   professionalId: number;
+  onNavigate?: (page: string) => void;
 }
 
-const ProfileHero: React.FC<ProfileHeroProps> = ({ professionalId }) => {
+const ProfileHero: React.FC<ProfileHeroProps> = ({ professionalId, onNavigate }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
 
@@ -187,7 +188,10 @@ const ProfileHero: React.FC<ProfileHeroProps> = ({ professionalId }) => {
               </div>
 
               <div className="space-y-4">
-                <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg group">
+                <button 
+                  onClick={() => onNavigate && onNavigate('booking')}
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg group"
+                >
                   <Calendar className="h-5 w-5 inline mr-2 group-hover:animate-bounce" />
                   Book Appointment
                 </button>

@@ -3,9 +3,10 @@ import { Calendar, Clock, Video, Phone, MapPin, CheckCircle, X, ChevronLeft, Che
 
 interface ProfileAvailabilityProps {
   professionalId: number;
+  onNavigate?: (page: string) => void;
 }
 
-const ProfileAvailability: React.FC<ProfileAvailabilityProps> = ({ professionalId }) => {
+const ProfileAvailability: React.FC<ProfileAvailabilityProps> = ({ professionalId, onNavigate }) => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [consultationType, setConsultationType] = useState<string>('video');
@@ -355,7 +356,7 @@ const ProfileAvailability: React.FC<ProfileAvailabilityProps> = ({ professionalI
                   </div>
                 </div>
                 <button
-                  onClick={handleBooking}
+                  onClick={() => onNavigate && onNavigate('booking')}
                   className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg group"
                 >
                   <Calendar className="h-5 w-5 inline mr-2 group-hover:animate-bounce" />
