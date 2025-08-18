@@ -32,16 +32,38 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({ data, onUpdate, o
 
   const weekDates = generateWeekDates(currentWeek);
 
-  // Mock availability data
-  const availabilityData: { [key: string]: { available: boolean; slots: string[] } } = {
-    '2024-12-25': { available: true, slots: ['09:00', '10:30', '14:00', '15:30', '16:30'] },
-    '2024-12-26': { available: true, slots: ['09:00', '11:00', '14:00', '16:00'] },
-    '2024-12-27': { available: true, slots: ['10:00', '11:30', '15:00', '16:30'] },
-    '2024-12-28': { available: false, slots: [] },
-    '2024-12-29': { available: true, slots: ['09:30', '11:00', '14:30', '16:00'] },
-    '2024-12-30': { available: true, slots: ['09:00', '10:30', '13:00', '15:30'] },
-    '2024-12-31': { available: false, slots: [] }
+  // Generate availability data dynamically based on current dates
+  const generateAvailabilityData = () => {
+    const availability: { [key: string]: { available: boolean; slots: string[] } } = {};
+    const today = new Date();
+    
+    // Generate availability for the next 30 days
+    for (let i = 0; i < 30; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+      const dateStr = formatDate(date);
+      
+      // Skip weekends for some variety
+      const dayOfWeek = date.getDay();
+      const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+      
+      if (isWeekend) {
+        availability[dateStr] = { available: false, slots: [] };
+      } else {
+        // Generate random available slots
+        const slots = ['09:00', '10:30', '11:00', '14:00', '15:30', '16:00', '16:30'];
+        const availableSlots = slots.filter(() => Math.random() > 0.3); // Random availability
+        availability[dateStr] = { 
+          available: availableSlots.length > 0, 
+          slots: availableSlots 
+        };
+      }
+    }
+    
+    return availability;
   };
+  
+  const availabilityData = generateAvailabilityData();
 
   const timezones = [
     { value: 'America/New_York', label: 'Eastern Time (ET)' },
@@ -76,7 +98,10 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({ data, onUpdate, o
 
   const isPast = (date: Date) => {
     const today = new Date();
-    return date < today;
+    today.setHours(0, 0, 0, 0);
+    const compareDate = new Date(date);
+    compareDate.setHours(0, 0, 0, 0);
+    return compareDate < today;
   };
 
   const navigateWeek = (direction: 'prev' | 'next') => {
@@ -91,8 +116,10 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({ data, onUpdate, o
 
   const handleDateSelect = (date: Date) => {
     const dateStr = formatDate(date);
-    setSelectedDate(dateStr);
-    setSelectedTime('');
+    if (!isPast(date) && getDayAvailability(date).available) {
+      setSelectedDate(dateStr);
+      setSelectedTime('');
+    }
   };
 
   const handleTimeSelect = (time: string) => {
@@ -226,8 +253,8 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({ data, onUpdate, o
                 <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                   Available Times for {formatDisplayDate(new Date(selectedDate))}
                 </h4>
-                <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {availabilityData[selectedDate]?.slots.map((time, index) => (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {(availabilityData[selectedDate]?.slots || []).map((time, index) => (
                     <button
                       key={time}
                       onClick={() => handleTimeSelect(time)}
@@ -245,6 +272,19 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({ data, onUpdate, o
                     </button>
                   ))}
                 </div>
+                
+                {/* No slots available message */}
+                {availabilityData[selectedDate]?.slots.length === 0 && (
+                  <div className="text-center py-8">
+                    <Clock className="h-12 w-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                      No slots available
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      Please select a different date
+                    </p>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -319,6 +359,25 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({ data, onUpdate, o
                 </div>
               </div>
             )}
+            
+            {/* Selection Status */}
+            <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 animate-fade-in-up animation-delay-900">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Selection Status</h3>
+              <div className="space-y-3">
+                <div className={`flex items-center space-x-3 ${selectedDate ? 'text-green-600 dark:text-green-400' : 'text-gray-400'}`}>
+                  <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${selectedDate ? 'border-green-500 bg-green-500' : 'border-gray-300'}`}>
+                    {selectedDate && <Clock className="h-3 w-3 text-white" />}
+                  </div>
+                  <span className="text-sm font-medium">Date Selected</span>
+                </div>
+                <div className={`flex items-center space-x-3 ${selectedTime ? 'text-green-600 dark:text-green-400' : 'text-gray-400'}`}>
+                  <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${selectedTime ? 'border-green-500 bg-green-500' : 'border-gray-300'}`}>
+                    {selectedTime && <Clock className="h-3 w-3 text-white" />}
+                  </div>
+                  <span className="text-sm font-medium">Time Selected</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -340,6 +399,15 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({ data, onUpdate, o
               <span>Continue to Details</span>
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
             </button>
+          )}
+          
+          {/* Helper text when selection is incomplete */}
+          {(!selectedDate || !selectedTime) && (
+            <div className="text-center">
+              <p className="text-gray-500 dark:text-gray-400 text-sm">
+                {!selectedDate ? 'Please select a date to continue' : 'Please select a time slot to continue'}
+              </p>
+            </div>
           )}
         </div>
       </div>
