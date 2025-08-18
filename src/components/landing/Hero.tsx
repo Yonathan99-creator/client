@@ -38,10 +38,10 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           {/* CTA buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-fade-in-up animation-delay-700">
             <button 
-              onClick={() => onNavigate && onNavigate('professionals')}
+              onClick={() => onNavigate && onNavigate('booking')}
               className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white font-semibold rounded-xl transition-all duration-500 hover:scale-110 hover:shadow-2xl shadow-lg animate-pulse-glow"
             >
-              Get Started Now
+              Book Appointment Now
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 group-hover:scale-125 transition-transform duration-300" />
             </button>
             
