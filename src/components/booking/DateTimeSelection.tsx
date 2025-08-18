@@ -32,6 +32,10 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({ data, onUpdate, o
 
   const weekDates = generateWeekDates(currentWeek);
 
+  const formatDate = (date: Date) => {
+    return date.toISOString().split('T')[0];
+  };
+
   // Generate availability data dynamically based on current dates
   const generateAvailabilityData = () => {
     const availability: { [key: string]: { available: boolean; slots: string[] } } = {};
@@ -73,10 +77,6 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({ data, onUpdate, o
     { value: 'Europe/London', label: 'Greenwich Mean Time (GMT)' },
     { value: 'Europe/Paris', label: 'Central European Time (CET)' }
   ];
-
-  const formatDate = (date: Date) => {
-    return date.toISOString().split('T')[0];
-  };
 
   const formatDisplayDate = (date: Date) => {
     return date.toLocaleDateString('en-US', { 
