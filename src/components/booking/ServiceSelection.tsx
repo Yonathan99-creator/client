@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Star, Clock, DollarSign, Video, Phone, MapPin, Filter, ChevronRight, Award, Users, CheckCircle } from 'lucide-react';
+import { Search, Star, Clock, DollarSign, Video, Phone, MapPin, Filter, ChevronRight, Award, Users, CheckCircle, Check } from 'lucide-react';
 import { BookingData } from './BookingPage';
 
 interface ServiceSelectionProps {
