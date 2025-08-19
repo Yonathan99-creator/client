@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './components/shared/Navbar';
 import Landing from './components/landing/Landing';
 import ProfessionalsPage from './components/professionals/ProfessionalsPage';
@@ -14,7 +14,14 @@ function App() {
 
   const handleNavigation = (page: string) => {
     setCurrentPage(page);
+    // Scroll to top when navigating to a new page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Also scroll to top when the component mounts or page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
 
   const renderCurrentPage = () => {
     switch (currentPage) {
